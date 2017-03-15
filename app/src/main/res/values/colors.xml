@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#303f9f</color>
     <color name="colorAccent">#333333</color>
     <color name="busy">#E8E81B</color>
+    <color name="line_color">#E8E81B</color>
+    <color name="base_line_color">#E8E81B</color>
+    <color name="scrub_line_color">#333333</color>
 </resources>

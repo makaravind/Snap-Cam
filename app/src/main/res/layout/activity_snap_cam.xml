@@ -43,7 +43,19 @@
                 app:srcCompat="@mipmap/ic_launcher"
                 android:id="@+id/imageView_snap"
                 tools:alpha="0.4"
-                android:background="@color/material_drawer_background" />
+                android:background="@color/material_drawer_background"
+                android:layout_alignParentBottom="true" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/resultsList"
+                tools:listitem="@layout/item_concept_1"
+                android:alpha="0.8"
+                android:foregroundGravity="center_vertical|center_horizontal"
+                android:hapticFeedbackEnabled="true"
+                android:layout_centerHorizontal="true"
+                android:layout_above="@+id/button_capture_image" />
 
             <Button
                 android:text="click"
@@ -55,17 +67,6 @@
                 android:layout_centerHorizontal="true"
                 style="@style/Widget.AppCompat.Button"
                 android:textColor="@android:color/black" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/resultsList"
-                tools:listitem="@layout/item_concept_1"
-                android:alpha="0.8"
-                android:foregroundGravity="center_vertical|center_horizontal"
-                android:hapticFeedbackEnabled="true"
-                android:layout_alignBottom="@+id/button_capture_image"
-                android:layout_centerHorizontal="true" />
         </RelativeLayout>
 
     </FrameLayout>

@@ -9,9 +9,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import clarifai2.dto.prediction.Concept;
 
-import com.clarifai.android.starter.api.v2.Game;
 import com.clarifai.android.starter.api.v2.R;
 
 import java.util.ArrayList;

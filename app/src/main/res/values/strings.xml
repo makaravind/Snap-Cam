@@ -2,7 +2,7 @@
     <string name="clarifai_id">3vBDyth077TrJWns5u2t_vGgIXNnVBALy3o1Go6Y</string>
     <string name="clarifai_secret">Gnd8vCK-7yoapOI-jztjDJGTW8HT0pDRuweLvZoj</string>
 
-    <string name="app_name">Clarifai</string>
+    <string name="app_name">SnapWord</string>
 
     <string name="error_external_storage_permission_not_granted">You must accept this permission so we can upload your images!</string>
 
@@ -13,6 +13,8 @@
     <string name="title_activity_in_game">InGame</string>
 
     <string name="game_object_intent">GAMESTATE</string>
+
+    <string name="graph">%1s</string>
 
 
 </resources>

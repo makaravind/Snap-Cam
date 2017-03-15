@@ -12,10 +12,17 @@
     tools:context="com.clarifai.android.starter.api.v2.activity.GameStatistics">
 
 
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/appbar" />
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stretchColumns="*">
+        android:stretchColumns="*"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <TableRow
             android:layout_width="0dp"

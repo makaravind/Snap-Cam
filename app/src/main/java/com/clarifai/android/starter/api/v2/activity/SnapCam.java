@@ -22,7 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.clarifai.android.starter.api.v2.Game;
+import com.clarifai.android.starter.api.v2.GameSingleton;
 import com.clarifai.android.starter.api.v2.R;
 import com.clarifai.android.starter.api.v2.adapter.App;
 import com.clarifai.android.starter.api.v2.adapter.RecognizeConceptsAdapter;
@@ -65,8 +65,8 @@ public class SnapCam extends AppCompatActivity implements Camera.PictureCallback
     private int backpressed_count = 0;
 
     // API
-    @NonNull
-    private Game gamestate;
+//    @NonNull
+//    private Game GameSingleton.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,13 +83,6 @@ public class SnapCam extends AppCompatActivity implements Camera.PictureCallback
         snapped_image = (ImageView) findViewById(R.id.imageView_snap);
 
         mIsCapturing = true;
-
-        // getting the gamestate object
-        try{
-            gamestate = (Game) getIntent().getExtras().getSerializable(String.valueOf(R.string.game_object_intent));
-        }catch (NullPointerException e){
-            gamestate = new Game();
-        }
     }
 
     @Override
@@ -197,13 +190,6 @@ public class SnapCam extends AppCompatActivity implements Camera.PictureCallback
         }
     };
 
-    private View.OnClickListener mRecaptureImageButtonClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            setupImageCapture();
-        }
-    };
-
     // API
     private mRecyclerClickListener onResultsListItemClicked(){
 
@@ -214,10 +200,10 @@ public class SnapCam extends AppCompatActivity implements Camera.PictureCallback
                 String concept_name = selected_concept.getText().toString();
                 Log.i("MAIN", "item clicked at " + position+ " -> " + concept_name);
                 if(position >= 0){
-                    boolean status = gamestate.checkIfValid(concept_name);
+                    boolean status = GameSingleton.getInstance().checkIfValid(concept_name);
                     if(status) {
-                        gamestate.updateChaining(status, concept_name);
-                        displayResults(gamestate);
+                        GameSingleton.getInstance().updateChaining(status, concept_name);
+                        displayResults();
                     }
                 }
 
@@ -234,7 +220,7 @@ public class SnapCam extends AppCompatActivity implements Camera.PictureCallback
         mCaptureImageButton.setVisibility(GONE);
 
         // Make sure we don't show a list of old concepts while the image is being uploaded
-        adapter.setData(Collections.<Concept>emptyList(), null);
+        adapter.setData(Collections.<Concept>emptyList());
 
         new AsyncTask<Void, Void, ClarifaiResponse<List<ClarifaiOutput<Concept>>>>() {
 
@@ -272,7 +258,7 @@ public class SnapCam extends AppCompatActivity implements Camera.PictureCallback
                 status.setText("choose one");
                 resultsList.setVisibility(VISIBLE);
                 snapped_image.setVisibility(VISIBLE);
-                adapter.setData(filteredPredictions, gamestate);
+                adapter.setData(filteredPredictions);
 
                 snapped_image.setImageBitmap(BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length));
                 snapped_image.setAlpha(0.45f);
@@ -295,10 +281,11 @@ public class SnapCam extends AppCompatActivity implements Camera.PictureCallback
 
     private void setupImageCapture() {
         backpressed_count = 0;
+
+        mCaptureImageButton.setVisibility(VISIBLE);
         resultsList.setVisibility(View.INVISIBLE);
         snapped_image.setVisibility(View.INVISIBLE);
         mCameraPreview.setVisibility(View.VISIBLE);
-
 
         mCamera.setDisplayOrientation(90);
         mCamera.startPreview();
@@ -313,10 +300,9 @@ public class SnapCam extends AppCompatActivity implements Camera.PictureCallback
 //        snapped_image.setImageBitmap(bitmap);
         mCamera.stopPreview();
         mCameraPreview.setVisibility(View.INVISIBLE);
+        mCaptureImageButton.setVisibility(View.INVISIBLE);
 
         onImagePicked(mCameraData);
-        mCaptureImageButton.setText("snap again");
-        mCaptureImageButton.setOnClickListener(mRecaptureImageButtonClickListener);
     }
 
     void onCreateCameraStuff(){
@@ -327,6 +313,7 @@ public class SnapCam extends AppCompatActivity implements Camera.PictureCallback
 
         mCaptureImageButton = (Button) findViewById(R.id.button_capture_image);
         mCaptureImageButton.setOnClickListener(mCaptureImageButtonClickListener);
+        mCaptureImageButton.setVisibility(View.INVISIBLE);
     }
 
     void onCreateResultsList(){
@@ -339,10 +326,9 @@ public class SnapCam extends AppCompatActivity implements Camera.PictureCallback
         resultsList.addOnItemTouchListener(onResultsListItemClicked());
     }
 
-    private void displayResults(Game gamestate) {
+    private void displayResults() {
         // displaying results after choosing the option
-        Intent i = new Intent(this, RecognizeConceptsActivity.class);
-        i.putExtra(String.valueOf(R.string.game_object_intent), gamestate);
+        Intent i = new Intent(this, Home.class);
         setResult(Activity.RESULT_OK, i);
         finish();
     }

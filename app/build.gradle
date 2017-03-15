@@ -57,4 +57,5 @@ dependencies {
   compile "com.jakewharton:butterknife:8.4.0"
   apt "com.jakewharton:butterknife-compiler:8.4.0"
   compile 'com.google.android.gms:play-services-appindexing:8.4.0'
+  compile 'com.jjoe64:graphview:4.2.1'
 }

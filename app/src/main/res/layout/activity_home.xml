@@ -5,21 +5,7 @@
     android:id="@+id/activity_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.clarifai.android.starter.api.v2.activity.Home">
-
-    <TextView
-        android:text="SnapWord"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
-        android:id="@+id/textView_brand"
-        android:textSize="36sp" />
 
     <Button
         android:text="New Game"
@@ -31,16 +17,6 @@
         android:background="@color/colorPrimaryLight"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
-
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/home_leaderboard"
-        android:layout_below="@+id/textView_brand"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="45dp"
-        android:id="@+id/view_leaderboard" />
 
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -98,4 +74,14 @@
                 android:max="@integer/MAX_TIME" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/appbar"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
 </RelativeLayout>

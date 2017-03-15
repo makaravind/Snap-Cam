@@ -3,7 +3,6 @@ package com.clarifai.android.starter.api.v2.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +13,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import com.clarifai.android.starter.api.v2.Game;
+import com.clarifai.android.starter.api.v2.GameSingleton;
 import com.clarifai.android.starter.api.v2.Util;
 import com.clarifai.android.starter.api.v2.R;
 
@@ -45,9 +44,6 @@ public final class RecognizeConceptsActivity extends HomeBaseActivity {
     private Handler handler;
     private Runnable r;
 
-    @NonNull
-    private Game gamestate = new Game();
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +60,7 @@ public final class RecognizeConceptsActivity extends HomeBaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        int current_state = gamestate.getState();
+        int current_state = GameSingleton.getInstance().getState();
         Toast.makeText(this, "resumed " + current_state, Toast.LENGTH_LONG).show();
         switch (current_state){
             case 1:
@@ -90,10 +86,8 @@ public final class RecognizeConceptsActivity extends HomeBaseActivity {
 
     @OnClick(R.id.fab)
     void playGame() {
-//    startActivityForResult(new Intent(Intent.ACTION_PICK).setType("image/*"), PICK_IMAGE);
-//        clearGame();
         String word = Util.generateRandomWord();
-        gamestate.setGeneratedWord(word);
+        GameSingleton.getInstance().setGeneratedWord(word);
         showGameWord(word);
 
         // timer starts
@@ -109,11 +103,9 @@ public final class RecognizeConceptsActivity extends HomeBaseActivity {
 
     @OnClick(R.id.camera_btn)
     void pickImage() {
-        gamestate.updateState(2);
-//        Intent start_camerat_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        startActivityForResult(start_camerat_intent, SNAPPED_IMAGE);
+        GameSingleton.getInstance().updateState(2);
         Intent to_snap_cam_intent = new Intent(this, SnapCam.class);
-        to_snap_cam_intent.putExtra("GAMESTATE", gamestate);
+        to_snap_cam_intent.putExtra("gamestate", GameSingleton.getInstance());
         startActivityForResult(to_snap_cam_intent, SNAP_CAM_INTENT_KEY);
 
     }
@@ -128,8 +120,6 @@ public final class RecognizeConceptsActivity extends HomeBaseActivity {
         switch(requestCode) {
             case SNAP_CAM_INTENT_KEY:
                 Toast.makeText(this, "working", Toast.LENGTH_LONG).show();
-                Log.i("RCA", "back agian");
-                gamestate = (Game) data.getExtras().getSerializable("GAMESTATE");
                 displayResults();
                 break;
         }
@@ -140,15 +130,15 @@ public final class RecognizeConceptsActivity extends HomeBaseActivity {
         // displaying results after choosing the option
         clearGame();
         // update UI for score
-        game_word.setText("chained " + gamestate.getWordsChain().size() + " score " + gamestate.getScore());
-        for(String item: gamestate.getWordsChain()){
+        game_word.setText("chained " + GameSingleton.getInstance().getWordsChain().size() + " score " + GameSingleton.getInstance().getScore());
+        for(String item: GameSingleton.getInstance().getWordsChain()){
             Toast.makeText(RecognizeConceptsActivity.this, item, Toast.LENGTH_SHORT).show();
         }
     }
 
     private void clearGame(){
         fab.setClickable(true);
-        gamestate.updateState(1);
+        GameSingleton.getInstance().updateState(1);
         timerInit();
     }
 

@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -14,9 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import clarifai2.dto.prediction.Concept;
 
-import com.clarifai.android.starter.api.v2.Game;
 import com.clarifai.android.starter.api.v2.R;
-import com.clarifai.android.starter.api.v2.Util;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,18 +26,16 @@ public class RecognizeConceptsAdapter extends RecyclerView.Adapter<RecognizeConc
     private final String LOG = "RecognizeConceptsAdapt";
 
   @NonNull private List<Concept> concepts = new ArrayList<>();
-  private Game gamestate;
 
-  public RecognizeConceptsAdapter setData(@NonNull List<Concept> concepts, Game gamestate) {
+  public RecognizeConceptsAdapter setData(@NonNull List<Concept> concepts) {
     this.concepts = concepts;
-    this.gamestate = gamestate;
     notifyDataSetChanged();
     return this;
   }
 
   public void clearData(){
       if(concepts.size() >= 0)
-          setData(Collections.<Concept>emptyList(), null);
+          setData(Collections.<Concept>emptyList());
   }
 
   @Override public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
