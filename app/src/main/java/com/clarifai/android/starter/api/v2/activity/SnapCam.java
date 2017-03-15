@@ -110,6 +110,7 @@ public class SnapCam extends AppCompatActivity implements Camera.PictureCallback
 
         if (mCamera == null) {
             try {
+
                 mCamera = Camera.open();
                 mCamera.setPreviewDisplay(mCameraPreview.getHolder());
                 if (mIsCapturing) {
@@ -200,10 +201,12 @@ public class SnapCam extends AppCompatActivity implements Camera.PictureCallback
                 String concept_name = selected_concept.getText().toString();
                 Log.i("MAIN", "item clicked at " + position+ " -> " + concept_name);
                 if(position >= 0){
-                    boolean status = GameSingleton.getInstance().checkIfValid(concept_name);
-                    if(status) {
-                        GameSingleton.getInstance().updateChaining(status, concept_name);
+                    boolean isCorrectWordChoosen = GameSingleton.getInstance().checkIfValid(concept_name);
+                    if(isCorrectWordChoosen) {
+                        GameSingleton.getInstance().updateChaining(isCorrectWordChoosen, concept_name);
                         displayResults();
+                    }else{
+                        status.setText("Bad luck ! you are choosing a wrong word. Try again!");
                     }
                 }
 
@@ -289,6 +292,7 @@ public class SnapCam extends AppCompatActivity implements Camera.PictureCallback
 
         mCamera.setDisplayOrientation(90);
         mCamera.startPreview();
+        status.setText("Be wise !");
         mCaptureImageButton.setText("snap now!");
         mCaptureImageButton.setOnClickListener(mCaptureImageButtonClickListener);
     }

@@ -81,7 +81,21 @@
         layout="@layout/appbar"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:id="@+id/include2" />
+
+    <TextView
+        android:text="SnapWord\nBeta 0.1v"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        android:id="@+id/version_textview"
+        android:textSize="36sp"
+        android:textAlignment="center"
+        android:textColor="@color/accent"
+        tools:textColor="#60222121"
+        android:layout_below="@+id/include2"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

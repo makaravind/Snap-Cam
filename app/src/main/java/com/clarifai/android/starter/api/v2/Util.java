@@ -38,7 +38,28 @@ public class Util {
    public static String generateRandomWord() {
 //       List<String> strings = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i",
 //               "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x");
-        List<String> strings = Arrays.asList("car", "bike", "tree", "tree", "are", "red");
+        List<String> strings= Arrays.asList("car", "bike", "tree", "are", "red",
+        "unpulsating",
+                "landlike",
+        "histographer",
+                "donbass",
+        "quebecois",
+                "cyzicus",
+        "shockley",
+                "acholic",
+        "physiology",
+                "keyserling",
+        "tumuluses",
+                "mora",
+        "advertized",
+                "kinetic",
+        "discarnation",
+                "inclinational",
+        "biobibliographic",
+                "rockne",
+        "aeneolithic",
+                "cere"
+                );
        int n = new Random().nextInt(strings.size());
        return strings.get(n);
    }
