@@ -25,17 +25,18 @@ public class RecognizeConceptsAdapter extends RecyclerView.Adapter<RecognizeConc
 
     private final String LOG = "RecognizeConceptsAdapt";
 
-  @NonNull private List<Concept> concepts = new ArrayList<>();
+  @NonNull private List<String> concepts = new ArrayList<>();
 
-  public RecognizeConceptsAdapter setData(@NonNull List<Concept> concepts) {
+  public RecognizeConceptsAdapter setData(@NonNull List<String> concepts) {
     this.concepts = concepts;
     notifyDataSetChanged();
     return this;
   }
 
   public void clearData(){
-      if(concepts.size() >= 0)
-          setData(Collections.<Concept>emptyList());
+      if(concepts.size() >= 0){
+          setData(new ArrayList<String>());
+      }
   }
 
   @Override public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -43,11 +44,11 @@ public class RecognizeConceptsAdapter extends RecyclerView.Adapter<RecognizeConc
   }
 
   @Override public void onBindViewHolder(final Holder holder, final int position) {
-    final Concept concept = concepts.get(position);
-    final String concept_name = concept.name() != null ? concept.name() : concept.id();
+    final String concept = concepts.get(position);
 
-    holder.label.setText(concept_name);
-    holder.probability.setText(String.valueOf(concept.value()));
+    holder.label.setText(concept);
+//    holder.probability.setText(String.valueOf(concept.value()));
+    holder.probability.setText("");
 
     Random rnd = new Random();
     int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));

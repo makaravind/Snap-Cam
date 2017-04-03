@@ -17,8 +17,31 @@ import java.util.Random;
 
 public class Util {
 
+    static List<String> strings= Arrays.asList("car", "bike", "tree", "are", "red",
+            "unpulsating",
+            "landlike",
+            "histographer",
+            "donbass",
+            "quebecois",
+            "cyzicus",
+            "shockley",
+            "acholic",
+            "physiology",
+            "keyserling",
+            "tumuluses",
+            "mora",
+            "advertized",
+            "kinetic",
+            "discarnation",
+            "inclinational",
+            "biobibliographic",
+            "rockne",
+            "aeneolithic",
+            "cere"
+    );
+
     @NonNull
-    static boolean isValid(String conceptName){
+    public static boolean isValid(String conceptName){
 
         String ingore[] = {"Person"};
         boolean isOneWord = conceptName.split(" ").length <= 1;
@@ -36,33 +59,15 @@ public class Util {
 
     @NonNull
    public static String generateRandomWord() {
-//       List<String> strings = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i",
-//               "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x");
-        List<String> strings= Arrays.asList("car", "bike", "tree", "are", "red",
-        "unpulsating",
-                "landlike",
-        "histographer",
-                "donbass",
-        "quebecois",
-                "cyzicus",
-        "shockley",
-                "acholic",
-        "physiology",
-                "keyserling",
-        "tumuluses",
-                "mora",
-        "advertized",
-                "kinetic",
-        "discarnation",
-                "inclinational",
-        "biobibliographic",
-                "rockne",
-        "aeneolithic",
-                "cere"
-                );
+
        int n = new Random().nextInt(strings.size());
        return strings.get(n);
    }
+
+    public static List<String> getWords(){
+
+        return strings;
+    }
 
     public static int getMinToMilli(int time){
         return time * 1000 * 60;

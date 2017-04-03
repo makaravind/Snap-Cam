@@ -93,17 +93,18 @@ public class GameSingleton implements Serializable {
 //       return generated_word.charAt(generated_word.length()-1) == picked_word.charAt(0);
 
         // generated word first letter == picked word first letter
-        return generated_word.charAt(0) == picked_word.charAt(0);
+        return generated_word.charAt(0) == picked_word.charAt(0) ||
+                generated_word.charAt(generated_word.length() - 1) == picked_word.charAt(picked_word.length() - 1);
 //        return true;
     }
 
-    public void updateChaining(boolean current_status, String word_played){
+    public void updateChaining(String word_played){
 
         wordsChain.add(word_played);
-        if (current_status)
-            score+=1;
 
-        Log.i(LOG, word_played + " " +String.valueOf(current_status) + " " + String.valueOf(times));
+        score+=1;
+
+        Log.i(LOG, word_played + " " + String.valueOf(times));
     }
 
     public void setTimes(int t){

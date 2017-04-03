@@ -8,6 +8,6 @@
         android:title="show scrores graph"
         android:id="@+id/leaderboard_menu"
         android:icon="@android:drawable/star_big_on"
-        app:showAsAction="ifRoom"
+        app:showAsAction="ifRoom|withText"
         />
 </menu>

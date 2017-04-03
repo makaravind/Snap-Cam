@@ -18,6 +18,7 @@ import com.clarifai.android.starter.api.v2.DataBase.DBHelper;
 import com.clarifai.android.starter.api.v2.GameSingleton;
 import com.clarifai.android.starter.api.v2.R;
 import com.clarifai.android.starter.api.v2.Timer;
+import com.clarifai.android.starter.api.v2.activity.camera.CameraActivity;
 
 public class InGame extends AppCompatActivity {
 
@@ -79,7 +80,6 @@ public class InGame extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        database.saveGameSingletonState();
         timer.stopTimer();
     }
 
@@ -129,7 +129,7 @@ public class InGame extends AppCompatActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent to_snap_cam_intent = new Intent(InGame.this, SnapCam.class);
+                Intent to_snap_cam_intent = new Intent(InGame.this, CameraActivity.class);
                 startActivityForResult(to_snap_cam_intent, INTENT_TO_SNAP_CAM);
             }
         };

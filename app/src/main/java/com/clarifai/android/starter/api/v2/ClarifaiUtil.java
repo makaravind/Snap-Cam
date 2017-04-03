@@ -77,31 +77,6 @@ public final class ClarifaiUtil {
       return byteArray;
   }
 
-  @NonNull
-  public static List<Concept> filterPredictions(List<Concept> predictions){
-
-      final int size = 3;
-      int count = 0;
-      List<Concept> filteredPredictions = new ArrayList<>(size);
-
-      // shuffling the predictions before taking top n elements
-      Collections.shuffle(predictions);
-
-      // taking only valid top n predicitons
-      for(Concept item: predictions){
-
-          if(count >= size)
-              break;
-          if(Util.isValid(item.name())){
-              filteredPredictions.add(item);
-              count++;
-          }
-      }
-      return filteredPredictions;
-  }
-
-
-
     @NonNull
   public static Activity unwrapActivity(@NonNull Context startFrom) {
     while (startFrom instanceof ContextWrapper) {

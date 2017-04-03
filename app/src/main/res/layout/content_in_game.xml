@@ -52,7 +52,7 @@
         android:elevation="3dp" />
 
     <TextView
-        android:text="try to match the first letter of this word"
+        android:text="try to match the first or last letter of this word"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

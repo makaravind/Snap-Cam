@@ -1,15 +1,9 @@
 package com.clarifai.android.starter.api.v2.activity;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Build;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,9 +28,6 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -75,8 +66,6 @@ public final class Home extends AppCompatActivity {
 
         bindPropertiesToLayout();
 
-        database.loadGameSingleton();
-
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -95,25 +84,12 @@ public final class Home extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         timer.startTimer();
-        /*SharedPreferences previewSizePref = getSharedPreferences("PREF",MODE_PRIVATE);
-        if (previewSizePref.contains("timer")) {
-            //your saved data exists
-            Toast.makeText(this, "started " + previewSizePref.getInt("timer", 0), Toast.LENGTH_SHORT).show();
-            GameSingleton.getInstance().setCurrent_remaining_time(previewSizePref.getInt("timer", 0));
-        }*/
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
-        /*SharedPreferences sharedPref = Home.this.getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("timer", GameSingleton.getInstance().getCurrentRemainingTime());
-        editor.apply();*/
-        database.saveGameSingletonState();
         timer.stopTimer();
     }
 
@@ -127,17 +103,10 @@ public final class Home extends AppCompatActivity {
         client.disconnect();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
     private void bindPropertiesToLayout() {
 
         // ading app bar
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
         new_game = (Button) findViewById(R.id.button_new_game);
@@ -235,6 +204,13 @@ public final class Home extends AppCompatActivity {
                 }
             }
         };
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.app_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
