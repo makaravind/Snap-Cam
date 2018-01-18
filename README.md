@@ -4,7 +4,7 @@
 
 # Details
  
- step 1 : start the game
- step 2 : click picture which is relevant to the word displayed
- step 3 : Game automatically validates whether you have answered correctly using AI (ofcourse using ClarifiAi)
- step 4 : Play till you beat the system!
+ step 1 : start the game <br>
+ step 2 : click picture which is relevant to the word displayed <br>
+ step 3 : Game automatically validates whether you have answered correctly using AI (ofcourse using ClarifiAi) <br>
+ step 4 : Play till you beat the system! <br>
